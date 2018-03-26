@@ -22,15 +22,17 @@ import br.cesed.unifacisa.lti.domain.Pessoa;
 import br.cesed.unifacisa.lti.exception.ChamadaInvalidaException;
 import br.cesed.unifacisa.lti.exception.NomeInvalidoException;
 import br.cesed.unifacisa.lti.services.PessoaService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-//@Api(value = "/pessoa")
+@Api(value = "/pessoa", description = "shows pessoas")
 @RestController
 @RequestMapping(value = "/pessoa")
 public class PessoaController {
 
 	@Autowired
 	private PessoaService pessoaService;
+	
 	@ApiOperation(value = "Ler todas as pessoas")
 	@GetMapping
 	public ResponseEntity<List<Pessoa>> readAllPessoa(Pageable pageable) {
@@ -42,12 +44,12 @@ public class PessoaController {
 		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
 	}
 	
-	//@ApiOperation(value = "Ler pessoa por ID")	
+	@ApiOperation(value = "Ler pessoa por ID")	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Optional<Pessoa>> readPessoaId(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.ok(pessoaService.readPessoaId(id));
 	}
-	//@ApiOperation(value = "Cria uma pessoa")
+	@ApiOperation(value = "Cria uma pessoa")
 	@PostMapping
 	public ResponseEntity<Pessoa> createPessoa(@Valid @RequestBody Pessoa pessoa) {
 		Pessoa body;
@@ -60,14 +62,14 @@ public class PessoaController {
 		}
 		return new ResponseEntity<Pessoa>(body, HttpStatus.CREATED);
 	}
-	//@ApiOperation(value = "Atualiza uma pessoa recebendo o ID")
+	@ApiOperation(value = "Atualiza uma pessoa recebendo o ID")
 	@PutMapping(path = "/{id}")
 	public ResponseEntity<Pessoa> updatePessoa(@PathVariable(name = "id") Long id,
 			@Valid @RequestBody Pessoa pessoa) {
 		pessoa.setId(id);
 		return ResponseEntity.ok(pessoaService.updatePessoa(pessoa));
 	}
-	//@ApiOperation(value = "Deleta uma pessoa recebendo um ID ")
+	@ApiOperation(value = "Deleta uma pessoa recebendo um ID ")
 	@DeleteMapping(path = "/{id}")
 	public void delete (@PathVariable(name = "id") Long id){
 		this.pessoaService.delete(id);
