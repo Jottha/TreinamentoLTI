@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+/**
+ * @author jolsy
+ *
+ */
 @Entity
 public class Pessoa implements Serializable {
 	
@@ -24,15 +28,19 @@ public class Pessoa implements Serializable {
 	@Column(unique = true)
 	private String email;
 	
+	@Column(unique = true)
+	private String password;
+	
 	@OneToOne
 	private Portfolio portfolio;
 	
 	
-	public Pessoa(Long id, String nome, String email, Portfolio portfolio) {
+	public Pessoa(Long id, String nome, String email, String password, Portfolio portfolio) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.password = password;
 		this.portfolio = portfolio;
 	}
 	public Long getId() {
@@ -52,6 +60,12 @@ public class Pessoa implements Serializable {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public Portfolio getPortfolio() {
 		return portfolio;

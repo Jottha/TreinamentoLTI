@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 
 @Api(value = "/pessoa", description = "shows pessoas")
 @RestController
-@RequestMapping(value = "/pessoa")
+@RequestMapping(value = "/api/pessoa")
 public class PessoaController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class PessoaController {
 
 		List<Pessoa> pessoas = pessoaService.readAllPessoa(pageable);
 		if (pessoas.isEmpty()) {
-			return new ResponseEntity<List<Pessoa>>(pessoaService.readAllPessoa(pageable), HttpStatus.OK);
+			return new ResponseEntity<List<Pessoa>>(pessoaService.readAllPessoa(pageable), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
 	}
@@ -48,6 +48,11 @@ public class PessoaController {
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<Optional<Pessoa>> readPessoaId(@PathVariable(name = "id") Long id) {
 		return ResponseEntity.ok(pessoaService.readPessoaId(id));
+	}
+	@ApiOperation(value = "Ler pessoa por email")
+	@GetMapping(path = "/{email}")
+	public ResponseEntity<Pessoa> readPessoaEmail(@PathVariable(name= "email") String email){
+		return ResponseEntity.ok(pessoaService.readPessoaEmail(email));
 	}
 	@ApiOperation(value = "Cria uma pessoa")
 	@PostMapping

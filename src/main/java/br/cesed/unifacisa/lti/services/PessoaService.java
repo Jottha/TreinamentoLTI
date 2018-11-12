@@ -24,11 +24,11 @@ public class PessoaService {
 				throw new ChamadaInvalidaException("Chamada equivocada no método POST, utilize o PUT");
 			}
 		}
-//		if(pessoa.getNome().equals("")) {
-//			if(pessoaRepository.findByNome(pessoa.getNome().equals("")) {
-//				throw new NomeInvalidoException("O nome não pode ser vazio");
-//			}
-//		}
+		if(pessoa.getNome().equals("")) {
+			if(pessoaRepository.findByNome(pessoa.getNome().equals(""))) {
+				throw new NomeInvalidoException("O nome não pode ser vazio");
+			}
+		}
 		return pessoaRepository.save(pessoa);
 	}
 	
@@ -38,6 +38,10 @@ public class PessoaService {
 	
 	public Pessoa readPessoaNome(String nome) {
 		return pessoaRepository.findByNome(nome).get(0);
+	}
+	
+	public Pessoa readPessoaEmail(String email) {
+		return pessoaRepository.findByEmail(email);
 	}
 	
 	public Optional<Pessoa> readPessoaId(Long id) {

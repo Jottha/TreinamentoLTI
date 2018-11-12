@@ -12,5 +12,9 @@ public interface PessoaRepository extends PagingAndSortingRepository<Pessoa, Lon
 
 	public List<Pessoa> findByNome(String nome);
 
+	public Pessoa findByEmail(String email);
+
+	public boolean findByNome(boolean equals);
+
 	
 }

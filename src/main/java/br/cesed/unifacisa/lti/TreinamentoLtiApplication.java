@@ -7,9 +7,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-//@Configuration
-//@EnableAutoConfiguration
-//@EnableSwagger2
+import io.swagger.annotations.SwaggerDefinition;
+
+@SwaggerDefinition
 @SpringBootApplication
 public class TreinamentoLtiApplication {
 	
